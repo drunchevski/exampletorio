@@ -12,6 +12,7 @@ function mouseClicked() {
           "Clicked on " + curEntity.name + " (" + curEntity.clr + ") "
         );
         removeEntityById(curEntity.id);
+        sEmit({ dtype: "removeEntity", id: curEntity.id });
       }
     }
   } else {
@@ -20,6 +21,7 @@ function mouseClicked() {
       clickPos,
       cursorModeColors[cursorMode]
     );
+    sEmit({ dtype: "createEntity", ent: idTable[newEntId] });
     console.log(`Created new entity: ${idTable[newEntId].name} [${newEntId}]`);
   }
 }

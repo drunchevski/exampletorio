@@ -25,10 +25,14 @@ generateChunks();
 function createEntity(name, pos, clr) {
   const id = getNewId();
   const entChunk = posToChunk(pos);
-  chunks[entChunk].push(id);
   const entity = { name, pos, clr, id, entChunk };
-  idTable[id] = entity;
+  addEntityToTables(entity);
   return id;
+}
+
+function addEntityToTables(ent) {
+  chunks[ent.entChunk].push(ent.id);
+  idTable[ent.id] = ent;
 }
 
 function removeEntityById(id) {

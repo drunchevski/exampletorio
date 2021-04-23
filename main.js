@@ -5,6 +5,19 @@ createEntity("noice", cPos(1, 3), "pink");
 let cursorMode = 0;
 const selection = [];
 
+function entityHandler(data) {
+  if (data.dtype === "removeEntity") {
+    removeEntityById(data.id);
+    return;
+  }
+  if (data.dtype === "createEntity") {
+    addEntityToTables(data.ent);
+    return;
+  }
+}
+
+sockethandlers.push(entityHandler);
+
 function setup() {
   let root = document.getElementById("canvasRoot");
   canv = createCanvas(root.offsetWidth, root.offsetHeight);
